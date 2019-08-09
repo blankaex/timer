@@ -55,8 +55,8 @@ function gradient(f,colors) {
 export class App {
   constructor(rootId) {
     this.root = document.getElementById(rootId);
-    this.time = "14:00";
-    this.parsedTime = this.parseTime("14:00");
+    this.time = "2:00:00";
+    this.parsedTime = this.parseTime("2:00:00");
     this.arcs = [];
     this.startTime = null;
     this.running = false;
@@ -175,11 +175,6 @@ export class App {
     container.appendChild(this.clock);
     return container;
   }
-  helpMsg() {
-    const p = document.createElement("p");
-    p.innerText = "Press Space To Start/Stop";
-    return p;
-  }
   parseTime(s) {
     let components = s.split(":");
     let hours,minutes,seconds;
@@ -226,7 +221,6 @@ export class App {
     const container = document.createElement("div");
     container.className = "container center row cover col";
     container.appendChild(this.renderClock());
-    container.appendChild(this.helpMsg());
     this.root.innerHTML = "";
     this.root.appendChild(container);
     this.root.innerHTML += " ";

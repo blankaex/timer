@@ -2,147 +2,23 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Index</title>
-		<link href="assets/main.css" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.7.94/css/materialdesignicons.min.css">
-		<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
+		<title>Timer</title>
+		<link rel="stylesheet" href="main.css" type="text/css">
+		<!--<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">-->
+
 	</head>
 	<body>
-		<div class="sidebar" id="sidebar">
-			<div class="toolbar">
-				<span class="mdi mdi-close icon" onclick="closeDrawer()"></span>
-			</div>
-			<div class="content">
-				<h1>  </h1>
-				<hr>
-				<div class="subbar">
-					<div class="tags">
-
-					</div>
-					<div class="actions">
-						<a id="link"><span class="mdi mdi-share icon"></span></a>
-						<span class="mdi mdi-github-circle icon"></span>
-					</div>
-				</div>
-				<p> no way dude that's wild holy shit is that legit anyway did you hear becky is pregos like <b>mad</b> pregos </p>
-			</div>
-
-		</div>
-		<main id="main">
-			<div class="container" id="container">
-				<div class="item-center"></div>
-			</div>
-		</main>
-	<script>
-		const items = [
-			{
-				title: "Flashcard",
-				tags: ["In Progress"],
-				description: "A beautiful site so you can make flashcards without having to battle a excessive interface. ",
-				domElem: null,
-				icon: "book-open",
-				link: "flashcard"
-			},
-			{
-				title: "Factor!",
-				tags: [],
-				description: "A simple game about prime factorising numbers",
-				domElem: null,
-				icon: "numeric-8-box-multiple-outline",
-				link: "factor"
-			},
-			{
-				title: "Timer",
-				tags: [],
-				description: "A simple elegant countdown timer, no fuss.",
-				domElem: null,
-				icon: "clock",
-				link: "timer"
-			},
-			{
-				title: "Deep Image Creator",
-				tags: [],
-				description: "A simple site to make some inspirational posters",
-				domElem: null,
-				icon: "image-area",
-				link: "dic"
-			},
-			{
-				title: "Timetable Pretty",
-				tags: [],
-				description: "A site to generate nice looking timetables",
-				domElem: null,
-				icon: "table",
-				link: "timetable-pretty"
-			},
-			{
-				title: "Podder",
-				tags: ["In Progress"],
-				description: "Me playing with some nice ways to render podcast rss feeds",
-				domElem: null,
-				icon: "podcast",
-				link: "podder"
-			}
-		];
-
-		const config = {
-			delay: 100,
-			radius: 200
-		};
-
-		function openDrawer(e) {
-		 let elem = items.filter((x)=>x.domElem == e.target)[0];
-		 if (!elem) elem = items.filter((x)=>x.domElem == e.target.parentNode)[0];
-		 const sb = document.getElementById("sidebar");
-		 sb.getElementsByTagName("h1")[0].innerText = elem.title;
-		 sb.getElementsByTagName("p")[0].innerHTML = elem.description;
-		 sb.getElementsByClassName("tags")[0].innerHTML = ""
-		 for (tag of elem.tags) {
-			let tagElem = document.createElement("span")
-			tagElem.innerText = tag
-		 	sb.getElementsByClassName("tags")[0].appendChild(tagElem)
-		 }
-		 document.getElementById("link").href = elem.link;
-		 sb.classList.add("open");
-		 document.getElementById("main").classList.add("out-focus");
-		}
-
-		function closeDrawer() {
-			const sb = document.getElementById("sidebar");
-			sb.classList.remove("open");
-			document.getElementById("main").classList.remove("out-focus");
-		}
-		function animate() {
-			let i = 0;
-			for(let item of items) {
-				setTimeout(function(){
-					item.domElem.style.transform = item.translation;
-					item.domElem.innerHTML = item.iconElem;
-				},config.delay*i)
-				i++;
-			}
-		}
-		window.onload = function() {
-			const root = document.getElementById("container");
-			let x,y,i=1;
-			let a = (360/items.length);
-			for(let item of items) {
-				const elem = document.createElement("div");
-				elem.classList.add("item");
-				item.iconElem = `<span class="mdi mdi-${item.icon} icon-ball"></span>`
-				elem.addEventListener("click",openDrawer);
-				item.domElem = elem;
-				// set up translations
-				x = config.radius*Math.cos((a*i)*(Math.PI/180));
-				y = config.radius*Math.sin((a*i)*(Math.PI/180));
-				item.translation = `translate(${x}px,${y}px)`;
-				i++;
-				// append
-				root.appendChild(elem);
-			}
-			setTimeout(animate,100);
-		}
-
-	</script>
+        <div id="cont">
+            <div id="txt">
+                <p>Reading...<span contenteditable="true">12:00</span></p>
+                <p>Start...<span contenteditable="true">12:10</span></p>
+                <p>End...<span contenteditable="true">14:10</span></p>
+                <p class="shift">Time...<span id="time" onload="showTime()"></span></p>
+            </div>
+            <div id="root"></div>
+        </div>
+		<script type="module" src="app.js"></script>
+		<script type="module" src="main.js"></script>
+		<script type="module" src="time.js"></script>
 	</body>
 </html>
